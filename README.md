@@ -44,19 +44,19 @@
 
 ## 🛠️ Tech Stack
 
-| Category | Technology | Version |
-|----------|-----------|---------|
-| Framework | Next.js | 15.0+ |
-| Language | TypeScript | 5.0+ |
-| Styling | Tailwind CSS | 3.4+ |
-| UI Library | shadcn/ui | Latest |
-| Animations | Framer Motion | 11.0+ |
-| State (Server) | TanStack Query | 5.0+ |
-| State (Client) | Zustand | 4.5+ |
-| HTTP Client | Axios | 1.6+ |
-| Forms | React Hook Form | 7.49+ |
-| Validation | Zod | 3.22+ |
-| Testing | Vitest | Latest |
+| Category       | Technology      | Version |
+| -------------- | --------------- | ------- |
+| Framework      | Next.js         | 15.0+   |
+| Language       | TypeScript      | 5.0+    |
+| Styling        | Tailwind CSS    | 3.4+    |
+| UI Library     | shadcn/ui       | Latest  |
+| Animations     | Framer Motion   | 11.0+   |
+| State (Server) | TanStack Query  | 5.0+    |
+| State (Client) | Zustand         | 4.5+    |
+| HTTP Client    | Axios           | 1.6+    |
+| Forms          | React Hook Form | 7.49+   |
+| Validation     | Zod             | 3.22+   |
+| Testing        | Vitest          | Latest  |
 
 ---
 
@@ -150,3 +150,4 @@ rajseba/
 └── package.json
 
 
+```
