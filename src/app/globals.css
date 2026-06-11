@@ -53,7 +53,7 @@
   --color-brand-dark: #D6363B;
   --color-brand-bg: #FFF0F1;
   --color-brand-hover: #FFE4E6;
-  
+
   --color-premium-slate: #0F172A;
   --color-premium-gray: #64748B;
   --color-premium-light: #F8FAFC;
@@ -64,7 +64,8 @@
   --card: oklch(1 0 0);
   --card-foreground: oklch(0.145 0 0);
 
-  --primary: #FF5A5F;           /* Your brand color */
+  --primary: #FF5A5F;
+  /* Your brand color */
   --primary-foreground: oklch(0.985 0 0);
 
   --secondary: oklch(0.97 0 0);
@@ -141,12 +142,36 @@ body {
 @layer base {
   * {
     @apply border-border outline-ring/50;
+    scrollbar-width: thin;
+    scrollbar-color: #FFD2D4 transparent;
   }
+
   body {
     @apply bg-background text-foreground;
   }
+
   html {
     @apply font-sans;
+  }
+
+  /* Webkit support for brand custom scrollbar */
+  ::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: #FFD2D4;
+    border-radius: 9999px;
+    transition: background-color 0.2s ease;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: #FF5B60;
   }
 }
 
@@ -175,13 +200,16 @@ body {
     height: 6px;
     width: 6px;
   }
+
   &::-webkit-scrollbar-track {
     background: transparent;
   }
+
   &::-webkit-scrollbar-thumb {
     background: #FFD2D4;
     border-radius: 9999px;
   }
+
   &::-webkit-scrollbar-thumb:hover {
     background: #FF5B60;
   }

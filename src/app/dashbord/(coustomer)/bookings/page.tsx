@@ -9,6 +9,7 @@ import {
   Briefcase,
   MessageCircle
 } from "lucide-react"
+import Link from "next/link"
 
 interface Booking {
   id: string;
@@ -201,9 +202,12 @@ export default function BookingsPage() {
                     <button className="bg-white hover:bg-slate-50 border border-slate-200 text-slate-700 text-xs font-bold py-2.5 px-6 rounded-2xl transition-colors active:scale-[0.98]">
                       View Details
                     </button>
-                    <button className="bg-[#FF5B60] hover:bg-[#FF464C] text-white text-xs font-bold py-2.5 px-6 rounded-2xl transition-all shadow-sm shadow-rose-500/10 active:scale-[0.98]">
+                    <Link
+                      href="/dashbord/bookings/track"
+                      className="bg-[#FF5B60] hover:bg-[#FF464C] text-white text-xs font-bold py-2.5 px-6 rounded-2xl transition-all shadow-sm shadow-rose-500/10 active:scale-[0.98] inline-block text-center"
+                    >
                       Track Order
-                    </button>
+                    </Link>
                   </div>
                 </div>
               </div>
