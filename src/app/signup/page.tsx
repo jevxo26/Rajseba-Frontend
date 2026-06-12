@@ -21,10 +21,9 @@ export default function RegisterPage() {
   const otpInputsRef = useRef<(HTMLInputElement | null)[]>([])
 
   const [formData, setFormData] = useState({
-    fullName: "",
+    name: "",
     email: "",
     phone: "",
-    password: "",
   })
 
   // Timer countdown hook for OTP resend limit
@@ -178,8 +177,8 @@ export default function RegisterPage() {
                     <User size={18} className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400" />
                     <input
                       type="text"
-                      name="fullName"
-                      value={formData.fullName}
+                      name="name"
+                      value={formData.name}
                       onChange={handleChange}
                       placeholder="John Doe"
                       className="w-full pl-12 pr-4 py-3.5 rounded-[14px] bg-[#F3F4F6] border border-transparent focus:bg-white focus:border-gray-305 focus:ring-2 focus:ring-[#FF565C]/15 focus:outline-none transition-all text-sm text-gray-800 placeholder-gray-450"
@@ -226,31 +225,7 @@ export default function RegisterPage() {
                   </div>
                 </div>
 
-                {/* Password */}
-                <div className="space-y-2">
-                  <label className="block text-xs font-bold text-gray-700 uppercase tracking-wider">
-                    Password
-                  </label>
-                  <div className="relative">
-                    <Lock size={18} className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400" />
-                    <input
-                      type={showPassword ? "text" : "password"}
-                      name="password"
-                      value={formData.password}
-                      onChange={handleChange}
-                      placeholder="••••••••"
-                      className="w-full pl-12 pr-12 py-3.5 rounded-[14px] bg-[#F3F4F6] border border-transparent focus:bg-white focus:border-gray-305 focus:ring-2 focus:ring-[#FF565C]/15 focus:outline-none transition-all text-sm text-gray-800 placeholder-gray-455"
-                      required
-                    />
-                    <button
-                      type="button"
-                      onClick={() => setShowPassword(!showPassword)}
-                      className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-650 focus:outline-none"
-                    >
-                      {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
-                    </button>
-                  </div>
-                </div>
+
 
                 {/* Terms Agreement */}
                 <div className="flex items-center gap-3 pt-2">
