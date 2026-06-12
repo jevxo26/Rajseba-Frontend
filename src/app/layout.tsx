@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
 import { Bai_Jamjuree } from "next/font/google";
-import Navbar from "./components/Navbar";
-import Footer from "./components/Footer";
 import { AuthProvider } from "@/context/AuthContext";
 import "./globals.css";
+import { Navbar } from "@/components/home/Navbar";
+import Footer from "@/components/home/Footer";
 
 const baiJamjuree = Bai_Jamjuree({
   subsets: ["latin", "latin-ext", "thai"],

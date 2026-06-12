@@ -7,7 +7,7 @@ export default function AnalyticsPage() {
   const { role } = useRole();
 
   // Access check
-  if (role !== "superadmin" && role !== "operator") {
+  if (role !== "superadmin") {
     return (
       <div className="min-h-[60vh] flex flex-col items-center justify-center p-8 bg-white border border-slate-100 rounded-3xl shadow-sm text-center animate-in fade-in duration-200">
         <div className="p-4 bg-rose-50 rounded-2xl text-rose-500 mb-4">
@@ -15,7 +15,7 @@ export default function AnalyticsPage() {
         </div>
         <h3 className="text-xl font-bold text-slate-800">Access Denied</h3>
         <p className="text-sm text-slate-500 mt-2 max-w-sm">
-          This panel is restricted to Administrators and Operators. Please switch your role using the selector in the navbar to test this view.
+          This panel is restricted to Administrators. Please switch your role using the selector in the navbar to test this view.
         </p>
       </div>
     );
