@@ -38,8 +38,8 @@ const containerVariants = {
 
 const cardVariants = {
   hidden: { opacity: 0, y: 30 },
-  visible: { 
-    opacity: 1, 
+  visible: {
+    opacity: 1,
     y: 0,
     transition: {
       type: "spring",
@@ -55,7 +55,7 @@ const Testimonials = () => {
   return (
     <div className="bg-transparent py-12 md:py-16 lg:py-20 overflow-hidden relative">
       <div className="max-w-7xl mx-auto px-4 md:px-6 relative z-10">
-        
+
         {/* Header Block matching the screenshot */}
         <div className="text-left mb-10 md:mb-12">
           <span className="text-xs font-bold tracking-wider uppercase text-[#FF5A5F] block mb-1">
@@ -67,7 +67,7 @@ const Testimonials = () => {
         </div>
 
         {/* Testimonials Grid */}
-        <motion.div 
+        <motion.div
           variants={containerVariants}
           initial="hidden"
           whileInView="visible"
