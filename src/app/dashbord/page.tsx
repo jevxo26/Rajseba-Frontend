@@ -26,7 +26,8 @@ import { useRouter } from "next/navigation";
 import { CustomTable } from "@/components/ui/table";
 
 export default function DashboardPage() {
-  const role = useAppSelector((state) => state.auth.role) || "superadmin";
+  const rawRole = useAppSelector((state) => state.auth.role) || "superadmin";
+  const role = typeof rawRole === 'string' ? rawRole.toLowerCase().replace(/\s+/g, '') : "client";
   const router = useRouter();
 
   useEffect(() => {

@@ -34,7 +34,8 @@ export const authSlice = createSlice({
       state.user = action.payload;
       state.isAuthenticated = true;
       if (action.payload.role) {
-        const roleString = typeof action.payload.role === 'object' ? (action.payload.role as any).name : action.payload.role;
+        const rawRoleName = typeof action.payload.role === 'object' ? (action.payload.role as any).name : action.payload.role;
+        const roleString = typeof rawRoleName === 'string' ? rawRoleName.toLowerCase().replace(/\s+/g, '') : "client";
         state.role = roleString as UserRole;
         if (typeof window !== "undefined") {
           localStorage.setItem("rajseba_user_role", roleString);

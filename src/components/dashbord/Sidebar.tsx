@@ -37,7 +37,8 @@ export function Sidebar({ open, onClose }: { open?: boolean; onClose?: () => voi
   const router = useRouter();
   const [collapsed, setCollapsed] = useState(false);
   const [mounted, setMounted] = useState(false);
-  const role = useAppSelector((state) => state.auth.role) || "superadmin";
+  const rawRole = useAppSelector((state) => state.auth.role) || "superadmin";
+  const role = (typeof rawRole === 'string' ? rawRole.toLowerCase().replace(/\s+/g, '') : "client") as UserRole;
   const roleName = getRoleName(role);
 
   useEffect(() => {
