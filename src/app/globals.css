@@ -357,19 +357,7 @@ body {
   display: flex;
   align-items: flex-start;
   justify-content: center;
-  padding: 48px 24px 24px;
-}
-
-@media (min-width: 768px) {
-  .services-hero {
-    padding: 64px 24px 24px;
-  }
-}
-
-@media (min-width: 1024px) {
-  .services-hero {
-    padding: 80px 24px 24px;
-  }
+  padding: 80px 24px 24px;
 }
 
 .services-hero-content {
@@ -1344,7 +1332,7 @@ body {
    PLACEHOLDER PAGES
    ============================ */
 .placeholder-page {
-  min-height: calc(100vh - 64px);
+  min-height: 60vh;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1355,15 +1343,19 @@ body {
 }
 
 .placeholder-content {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
   text-align: center;
-  gap: 16px;
+  max-width: 500px;
+  width: 100%;
+  padding: 40px;
+  background-color: var(--white);
+  border-radius: 24px;
+  border: 1px solid var(--border-light);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.04);
 }
 
 .placeholder-icon {
   font-size: 4rem;
+  margin-bottom: 16px;
   line-height: 1;
   margin-bottom: 8px;
   animation: floatIcon 3s ease-in-out infinite;
@@ -1382,181 +1374,17 @@ body {
 }
 
 .placeholder-title {
-  font-size: 2.5rem;
+  font-size: 2rem;
   font-weight: 700;
   color: var(--text-primary);
-  letter-spacing: -0.03em;
   margin: 0;
+  margin-bottom: 12px;
+  letter-spacing: -0.02em;
 }
 
 .placeholder-subtitle {
-  font-size: 1.05rem;
+  font-size: 1rem;
   color: var(--text-secondary);
-  line-height: 1.6;
   margin: 0;
-  max-width: 400px;
-}
-
-/* ============================
-   RESPONSIVE
-   ============================ */
-@media (max-width: 768px) {
-  .navbar-nav {
-    display: none;
-  }
-
-  .navbar-inner {
-    padding: 0 16px;
-  }
-
-  .services-title {
-    font-size: 2rem;
-  }
-
-  .services-search-bar {
-    flex-direction: column;
-    border-radius: var(--radius-lg);
-    padding: 12px;
-    gap: 8px;
-  }
-
-  .services-search-location {
-    border-left: none;
-    border-top: 1px solid var(--border-light);
-    padding: 8px 0 0;
-    justify-content: center;
-  }
-
-  .services-filter-btn {
-    align-self: flex-end;
-  }
-
-  .services-categories {
-    gap: 8px;
-  }
-
-  .services-category-pill {
-    padding: 8px 14px;
-    font-size: 0.85rem;
-  }
-
-  .home-title {
-    font-size: 2.25rem;
-  }
-
-  .home-cta-group {
-    flex-direction: column;
-    width: 100%;
-    max-width: 300px;
-  }
-
-  .home-cta-primary,
-  .home-cta-secondary {
-    text-align: center;
-  }
-
-  .home-stats {
-    flex-direction: column;
-    gap: 20px;
-    padding: 24px;
-  }
-
-  .home-stat-divider {
-    width: 60px;
-    height: 1px;
-  }
-
-  .placeholder-title {
-    font-size: 2rem;
-  }
-
-  .trending-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .trending-card-featured {
-    grid-template-columns: 1fr;
-  }
-
-  .trending-card-featured-image {
-    min-height: 220px;
-  }
-
-  .trending-title {
-    font-size: 1.3rem;
-  }
-
-  .listings-container {
-    grid-template-columns: 1fr;
-  }
-
-  .listings-filters {
-    position: static;
-  }
-
-  .listings-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
-
-@media (max-width: 480px) {
-  .listings-grid {
-    grid-template-columns: 1fr;
-  }
-}
-
-/* ============================
-   GLOBAL FOOTER
-   ============================ */
-.footer {
-  background: #FFF0EF;
-  border-top: 1px solid var(--border-light);
-  padding: 60px 24px 40px;
-  text-align: center;
-  margin-top: auto;
-}
-
-.footer-container {
-  max-width: 800px;
-  margin: 0 auto;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 24px;
-}
-
-.footer-brand {
-  font-size: 1.8rem;
-  font-weight: 800;
-  color: var(--brand-primary);
-  text-decoration: none;
-  letter-spacing: -0.03em;
-}
-
-.footer-links {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: center;
-  gap: 24px;
-}
-
-.footer-link {
-  font-size: 0.9rem;
-  font-weight: 600;
-  color: var(--text-secondary);
-  text-decoration: none;
-  transition: color var(--transition-base);
-}
-
-.footer-link:hover {
-  color: var(--brand-primary);
-  text-decoration: underline;
-}
-
-.footer-copyright {
-  font-size: 0.85rem;
-  color: var(--text-muted);
-  margin: 16px 0 0;
-  font-weight: 500;
+  line-height: 1.6;
 }
