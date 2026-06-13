@@ -19,9 +19,13 @@ import {
   Phone,
   LucideIcon,
   User,
+  LogOut,
+  Settings,
 } from "lucide-react";
 import { motion, useScroll, useTransform, AnimatePresence } from "framer-motion";
 import { CATEGORIES_CONTENT } from "./sections/home/ExploreCategories";
+import { useAppSelector, useAppDispatch } from "@/redux/hooks";
+import { logout as authLogout, getRoleName } from "@/redux/features/auth/authSlice";
 
 interface NavLink {
   label: string;
@@ -55,6 +59,11 @@ const MOBILE_BOTTOM_LINKS: NavLink[] = [
 ];
 
 export function Navbar() {
+  const dispatch = useAppDispatch();
+  const { user, isAuthenticated, role } = useAppSelector((state) => state.auth);
+  const [profileDropdownOpen, setProfileDropdownOpen] = useState(false);
+  const profileDropdownRef = useRef<HTMLDivElement>(null);
+
   const [isOpen, setIsOpen] = useState(false);
   const [mobileSearchOpen, setMobileSearchOpen] = useState(false);
   const [mounted, setMounted] = useState(false);
@@ -65,6 +74,14 @@ export function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
   const mobileSearchRef = useRef<HTMLInputElement>(null);
   const isHomepage = pathname === "/";
+
+  const roleName = getRoleName(role);
+  const profile = user ? {
+    name: user.name || "User",
+    email: user.email || "",
+    roleName: roleName || "Client",
+    avatar: (user.name || "U").substring(0, 2).toUpperCase()
+  } : null;
 
   const { scrollY } = useScroll();
 
@@ -122,7 +139,19 @@ export function Navbar() {
     setMobileSearchOpen(false);
     setShowMenuDropdown(false);
     setShowMobileAccordion(false);
+    setProfileDropdownOpen(false);
   }, [pathname]);
+
+  // Close profile dropdown on click outside
+  useEffect(() => {
+    function handleClickOutside(event: MouseEvent) {
+      if (profileDropdownRef.current && !profileDropdownRef.current.contains(event.target as Node)) {
+        setProfileDropdownOpen(false);
+      }
+    }
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
 
   const isActive = (href: string) => {
     if (href === "/") return pathname === "/" && (currentHash === "" || currentHash === "#");
@@ -139,6 +168,17 @@ export function Navbar() {
     setIsOpen((v) => !v);
     if (mobileSearchOpen) setMobileSearchOpen(false);
   };
+
+  const bottomLinks = MOBILE_BOTTOM_LINKS.map((link) => {
+    if (mounted && isAuthenticated && link.label === "Login") {
+      return {
+        label: "Dashboard",
+        href: role === "client" ? "/dashbord/overview" : "/dashbord",
+        icon: User,
+      };
+    }
+    return link;
+  });
 
   return (
     <>
@@ -315,21 +355,109 @@ export function Navbar() {
               })}
             </nav>
 
-            {/* Auth Buttons (desktop/tablet) */}
-            <div className="hidden md:flex items-center gap-2 lg:gap-3 flex-shrink-0">
-              <Link
-                href="/login"
-                className="font-semibold text-slate-700 hover:text-[#FF5A5F] hover:bg-rose-50 py-2 px-3 rounded-lg text-sm lg:text-[15px] transition-colors"
-              >
-                Login
-              </Link>
-              <Link
-                href="/signup"
-                className="bg-[#FF5A5F] hover:bg-[#FF4449] text-white font-semibold py-2.5 px-5 rounded-lg text-sm lg:text-[15px] transition-all shadow-sm hover:shadow-md active:scale-95"
-              >
-                Signup
-              </Link>
-            </div>
+            {/* Auth Buttons or Profile Dropdown (desktop/tablet) */}
+            {mounted && isAuthenticated && profile ? (
+              <div className="hidden md:block relative" ref={profileDropdownRef}>
+                <button
+                  onClick={() => setProfileDropdownOpen(!profileDropdownOpen)}
+                  className="flex items-center gap-2.5 hover:opacity-90 transition-opacity focus:outline-none"
+                  aria-haspopup="true"
+                  aria-expanded={profileDropdownOpen}
+                >
+                  <div className="text-right hidden lg:block">
+                    <p className="text-xs font-bold text-slate-800 leading-none">{profile.name}</p>
+                    <p className="text-[10px] text-slate-400 mt-1 leading-none font-semibold">{profile.roleName}</p>
+                  </div>
+                  <div className="w-9 h-9 bg-rose-100 text-[#FF5A5F] font-bold rounded-full flex items-center justify-center border border-rose-200 shadow-sm hover:scale-105 transition-transform duration-200 select-none">
+                    {profile.avatar}
+                  </div>
+                </button>
+
+                <AnimatePresence>
+                  {profileDropdownOpen && (
+                    <motion.div
+                      initial={{ opacity: 0, y: 10, scale: 0.95 }}
+                      animate={{ opacity: 1, y: 0, scale: 1 }}
+                      exit={{ opacity: 0, y: 8, scale: 0.95 }}
+                      transition={{ duration: 0.15 }}
+                      className="absolute right-0 mt-2 w-56 bg-white border border-slate-100 rounded-2xl shadow-xl py-2 z-50 overflow-hidden"
+                    >
+                      <div className="px-4 py-3 border-b border-slate-50 bg-slate-50/40">
+                        <p className="text-sm font-bold text-slate-800 truncate">{profile.name}</p>
+                        <p className="text-xs text-slate-400 truncate mt-0.5 font-medium">{profile.email}</p>
+                        <span className="inline-block px-2 py-0.5 text-[9px] font-bold text-[#FF5A5F] bg-rose-50 border border-rose-100/50 rounded-full mt-2">
+                          {profile.roleName}
+                        </span>
+                      </div>
+                      <div className="p-1 space-y-0.5">
+                        <Link
+                          href={role === "client" ? "/dashbord/overview" : "/dashbord"}
+                          className="w-full flex items-center gap-3 p-2 rounded-xl text-left text-sm text-slate-700 hover:bg-slate-50 hover:text-[#FF5A5F] transition-all font-semibold"
+                          onClick={() => setProfileDropdownOpen(false)}
+                        >
+                          <div className="p-1.5 rounded-lg bg-slate-50 text-slate-500">
+                            <LayoutGrid size={15} />
+                          </div>
+                          <span>Dashboard</span>
+                        </Link>
+
+                        <Link
+                          href="/dashbord/profile"
+                          className="w-full flex items-center gap-3 p-2 rounded-xl text-left text-sm text-slate-700 hover:bg-slate-50 hover:text-[#FF5A5F] transition-all font-semibold"
+                          onClick={() => setProfileDropdownOpen(false)}
+                        >
+                          <div className="p-1.5 rounded-lg bg-slate-50 text-slate-500">
+                            <User size={15} />
+                          </div>
+                          <span>My Profile</span>
+                        </Link>
+
+                        <Link
+                          href="/dashbord/settings"
+                          className="w-full flex items-center gap-3 p-2 rounded-xl text-left text-sm text-slate-700 hover:bg-slate-50 hover:text-[#FF5A5F] transition-all font-semibold"
+                          onClick={() => setProfileDropdownOpen(false)}
+                        >
+                          <div className="p-1.5 rounded-lg bg-slate-50 text-slate-500">
+                            <Settings size={15} />
+                          </div>
+                          <span>Settings</span>
+                        </Link>
+
+                        <div className="my-1 border-t border-slate-100/60" />
+
+                        <button
+                          onClick={() => {
+                            setProfileDropdownOpen(false);
+                            dispatch(authLogout());
+                          }}
+                          className="w-full flex items-center gap-3 p-2 rounded-xl text-left text-sm text-rose-600 hover:bg-rose-50 transition-all font-semibold"
+                        >
+                          <div className="p-1.5 rounded-lg bg-rose-50 text-[#FF5A5F]">
+                            <LogOut size={15} />
+                          </div>
+                          <span>Sign Out</span>
+                        </button>
+                      </div>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </div>
+            ) : (
+              <div className="hidden md:flex items-center gap-2 lg:gap-3 flex-shrink-0">
+                <Link
+                  href="/login"
+                  className="font-semibold text-slate-700 hover:text-[#FF5A5F] hover:bg-rose-50 py-2 px-3 rounded-lg text-sm lg:text-[15px] transition-colors"
+                >
+                  Login
+                </Link>
+                <Link
+                  href="/signup"
+                  className="bg-[#FF5A5F] hover:bg-[#FF4449] text-white font-semibold py-2.5 px-5 rounded-lg text-sm lg:text-[15px] transition-all shadow-sm hover:shadow-md active:scale-95"
+                >
+                  Signup
+                </Link>
+              </div>
+            )}
 
             {/* Mobile Right Controls */}
             <div className="flex md:hidden items-center gap-1">
@@ -478,23 +606,81 @@ export function Navbar() {
                   );
                 })}
 
-                {/* Auth Buttons */}
-                <div className="flex flex-col gap-3 pt-4 border-t border-slate-100 mt-1">
-                  <Link
-                    href="/login"
-                    className="text-center py-3 text-slate-700 font-semibold text-[15px] border border-slate-200 rounded-xl hover:border-[#FF5A5F] hover:text-[#FF5A5F] hover:bg-rose-50 transition-colors"
-                    onClick={() => setIsOpen(false)}
-                  >
-                    Login
-                  </Link>
-                  <Link
-                    href="/register"
-                    className="text-center py-3 bg-[#FF5A5F] hover:bg-[#FF4449] text-white font-semibold text-[15px] rounded-xl shadow-sm transition-colors active:scale-[0.98]"
-                    onClick={() => setIsOpen(false)}
-                  >
-                    Signup
-                  </Link>
-                </div>
+                {/* Auth Section */}
+                {mounted && isAuthenticated && profile ? (
+                  <div className="pt-4 border-t border-slate-100 mt-1 space-y-4">
+                    {/* User profile card */}
+                    <div className="flex items-center gap-3.5 p-3.5 rounded-2xl bg-slate-50 border border-slate-100">
+                      <div className="w-12 h-12 bg-rose-100 text-[#FF5A5F] font-bold rounded-full flex items-center justify-center border border-rose-200 shadow-inner select-none shrink-0">
+                        {profile.avatar}
+                      </div>
+                      <div className="min-w-0 flex-grow">
+                        <p className="text-sm font-bold text-slate-800 truncate leading-none">{profile.name}</p>
+                        <p className="text-xs text-slate-400 mt-1 truncate font-medium leading-none">{profile.email}</p>
+                        <span className="inline-block px-2 py-0.5 text-[9px] font-bold text-[#FF5A5F] bg-rose-50 border border-rose-100/50 rounded-full mt-1.5 font-semibold">
+                          {profile.roleName}
+                        </span>
+                      </div>
+                    </div>
+
+                    {/* Navigation Actions */}
+                    <div className="grid grid-cols-3 gap-2">
+                      <Link
+                        href={role === "client" ? "/dashbord/overview" : "/dashbord"}
+                        className="flex flex-col items-center justify-center p-3 rounded-xl bg-slate-50 border border-slate-100 text-slate-700 hover:bg-rose-50 hover:text-[#FF5A5F] transition-all gap-1.5"
+                        onClick={() => setIsOpen(false)}
+                      >
+                        <LayoutGrid size={18} className="text-slate-400" />
+                        <span className="text-[11px] font-bold">Dashboard</span>
+                      </Link>
+                      <Link
+                        href="/dashbord/profile"
+                        className="flex flex-col items-center justify-center p-3 rounded-xl bg-slate-50 border border-slate-100 text-slate-700 hover:bg-rose-50 hover:text-[#FF5A5F] transition-all gap-1.5"
+                        onClick={() => setIsOpen(false)}
+                      >
+                        <User size={18} className="text-slate-400" />
+                        <span className="text-[11px] font-bold">Profile</span>
+                      </Link>
+                      <Link
+                        href="/dashbord/settings"
+                        className="flex flex-col items-center justify-center p-3 rounded-xl bg-slate-50 border border-slate-100 text-slate-700 hover:bg-rose-50 hover:text-[#FF5A5F] transition-all gap-1.5"
+                        onClick={() => setIsOpen(false)}
+                      >
+                        <Settings size={18} className="text-slate-400" />
+                        <span className="text-[11px] font-bold">Settings</span>
+                      </Link>
+                    </div>
+
+                    {/* Sign Out */}
+                    <button
+                      onClick={() => {
+                        setIsOpen(false);
+                        dispatch(authLogout());
+                      }}
+                      className="w-full flex items-center justify-center gap-2 py-3 rounded-xl bg-rose-50 text-rose-600 hover:bg-rose-100/80 font-bold text-[15px] transition-all active:scale-[0.98]"
+                    >
+                      <LogOut size={16} />
+                      <span>Sign Out</span>
+                    </button>
+                  </div>
+                ) : (
+                  <div className="flex flex-col gap-3 pt-4 border-t border-slate-100 mt-1">
+                    <Link
+                      href="/login"
+                      className="text-center py-3 text-slate-700 font-semibold text-[15px] border border-slate-200 rounded-xl hover:border-[#FF5A5F] hover:text-[#FF5A5F] hover:bg-rose-50 transition-colors"
+                      onClick={() => setIsOpen(false)}
+                    >
+                      Login
+                    </Link>
+                    <Link
+                      href="/register"
+                      className="text-center py-3 bg-[#FF5A5F] hover:bg-[#FF4449] text-white font-semibold text-[15px] rounded-xl shadow-sm transition-colors active:scale-[0.98]"
+                      onClick={() => setIsOpen(false)}
+                    >
+                      Signup
+                    </Link>
+                  </div>
+                )}
 
               </div>
             </motion.div>
@@ -505,7 +691,7 @@ export function Navbar() {
       {/* ─── MOBILE BOTTOM NAVIGATION ─── */}
       <div className="md:hidden fixed bottom-0 left-0 right-0 bg-white/95 backdrop-blur-md border-t border-slate-200/80 shadow-[0_-4px_12px_rgba(0,0,0,0.03)] z-50 px-2 py-2 pb-safe-bottom">
         <div className="grid grid-cols-6 gap-1 max-w-lg mx-auto">
-          {MOBILE_BOTTOM_LINKS.map((link, i) => {
+          {bottomLinks.map((link, i) => {
             const Icon = link.icon;
             const active = link.hasDropdown
               ? pathname.startsWith("/categories") || (isOpen && showMobileAccordion)
