@@ -21,6 +21,8 @@ import {
   User,
   LogOut,
   Settings,
+  LogIn,
+  UserPlus
 } from "lucide-react";
 import { motion, useScroll, useTransform, AnimatePresence } from "framer-motion";
 import { CATEGORIES_CONTENT } from "./sections/home/ExploreCategories";
@@ -446,14 +448,17 @@ export function Navbar() {
               <div className="hidden md:flex items-center gap-2 lg:gap-3 flex-shrink-0">
                 <Link
                   href="/login"
-                  className="font-semibold text-slate-700 hover:text-[#FF5A5F] hover:bg-rose-50 py-2 px-3 rounded-lg text-sm lg:text-[15px] transition-colors"
+                  className="flex items-center gap-2 font-semibold text-slate-700 text-[#FF5A5F] bg-rose-100 py-2 px-3 rounded-lg text-sm lg:text-[15px] transition-colors"
                 >
+                  <LogIn className="w-4 h-4" />
                   Login
                 </Link>
+
                 <Link
                   href="/signup"
-                  className="bg-[#FF5A5F] hover:bg-[#FF4449] text-white font-semibold py-2.5 px-5 rounded-lg text-sm lg:text-[15px] transition-all shadow-sm hover:shadow-md active:scale-95"
+                  className="flex items-center gap-2 bg-[#FF5A5F] hover:bg-[#FF4449] text-white font-semibold py-2.5 px-5 rounded-lg text-sm lg:text-[15px] transition-all shadow-sm hover:shadow-md active:scale-95"
                 >
+                  <UserPlus className="w-4 h-4" />
                   Signup
                 </Link>
               </div>
@@ -664,19 +669,22 @@ export function Navbar() {
                     </button>
                   </div>
                 ) : (
-                  <div className="flex flex-col gap-3 pt-4 border-t border-slate-100 mt-1">
+                  <div className="grid grid-cols-2 gap-3 pt-4 border-t border-slate-100 mt-1">
                     <Link
                       href="/login"
-                      className="text-center py-3 text-slate-700 font-semibold text-[15px] border border-slate-200 rounded-xl hover:border-[#FF5A5F] hover:text-[#FF5A5F] hover:bg-rose-50 transition-colors"
+                      className="flex items-center justify-center gap-2 py-3 text-slate-700 font-semibold text-[15px] border border-slate-200 rounded-xl hover:border-[#FF5A5F] hover:text-[#FF5A5F] hover:bg-rose-50 transition-colors"
                       onClick={() => setIsOpen(false)}
                     >
+                      <LogIn className="w-4 h-4" />
                       Login
                     </Link>
+
                     <Link
                       href="/register"
-                      className="text-center py-3 bg-[#FF5A5F] hover:bg-[#FF4449] text-white font-semibold text-[15px] rounded-xl shadow-sm transition-colors active:scale-[0.98]"
+                      className="flex items-center justify-center gap-2 py-3 bg-[#FF5A5F] hover:bg-[#FF4449] text-white font-semibold text-[15px] rounded-xl shadow-sm transition-colors active:scale-[0.98]"
                       onClick={() => setIsOpen(false)}
                     >
+                      <UserPlus className="w-4 h-4" />
                       Signup
                     </Link>
                   </div>

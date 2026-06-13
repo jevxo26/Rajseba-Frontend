@@ -27,9 +27,7 @@ export default function Home() {
           <Stats />
           <HowItWorks />
           <Testimonials />
-          {/* <AppDownload /> */}
           <FAQ />
-          {/* <PartnerCta/> */}
         </div>
       </div>
     </div>

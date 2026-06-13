@@ -115,9 +115,9 @@ const Testimonials = () => {
   }, [maxIndex]);
 
   return (
-    <div className="bg-slate-50 py-8 md:py-12 overflow-hidden relative">
+    <div className=" py-8 md:py-12 overflow-hidden relative">
       <div className="max-w-7xl mx-auto px-4 md:px-6 relative z-10">
-        
+
         {/* Header Block */}
         <div className="mb-8 px-2">
           <h2 className="text-3xl font-bold text-slate-800 mb-2 flex items-center gap-2">
@@ -131,7 +131,7 @@ const Testimonials = () => {
 
         {/* Testimonial slider wrapper */}
         <div className="relative overflow-hidden w-full py-4">
-          <div 
+          <div
             className="flex transition-transform duration-500 ease-out"
             style={{ transform: `translateX(-${activeIndex * (100 / cardsToShow)}%)` }}
           >
