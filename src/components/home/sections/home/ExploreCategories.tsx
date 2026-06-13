@@ -16,7 +16,7 @@ import {
 import { MdOutlineCleaningServices, MdOutlineSecurity } from "react-icons/md";
 import { Button } from "@/components/ui/button";
 
-const CATEGORIES_CONTENT = {
+export const CATEGORIES_CONTENT = {
   title: "Explore Categories",
   subtitle: "Choose from our wide range of professional, verified home services",
   categories: [

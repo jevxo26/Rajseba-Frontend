@@ -176,6 +176,7 @@ body {
 
   html {
     @apply font-sans;
+    overflow-x: hidden;
   }
 
   /* Webkit support for brand custom scrollbar */

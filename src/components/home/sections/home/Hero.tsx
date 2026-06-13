@@ -2,12 +2,13 @@
 
 import { useState } from "react";
 import Image from "next/image";
-import { Search, MapPin, ChevronDown, Calendar } from "lucide-react";
+import { Search, MapPin, Calendar } from "lucide-react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useRouter } from "next/navigation";
 import dayjs from "dayjs";
 import { CustomCalendar } from "@/components/ui/calendar";
 import { Button } from "@/components/ui/button";
+import { CustomSelect } from "@/components/ui/select";
 
 // Clean Data Architecture - Configurable Dynamic Copy
 const HERO_CONTENT = {
@@ -33,6 +34,11 @@ const HERO_CONTENT = {
   ],
   searchButtonText: "Book Now",
 };
+
+const categoryOptions = HERO_CONTENT.categories.map((cat) => ({
+  value: cat.slug,
+  label: cat.label,
+}));
 
 // Title entrance variants
 const containerVariants = {
@@ -91,7 +97,7 @@ const Hero = () => {
 
   return (
     <div
-      className="relative w-full min-h-[60vh] md:min-h-[66vh] lg:min-h-[70vh] flex items-center justify-center overflow-hidden py-16 md:py-24"
+      className="relative w-full min-h-[60vh] md:min-h-[66vh] lg:min-h-[70vh] flex items-center justify-center py-16 md:py-24"
     >
       {/* Background Image Container */}
       <div className="absolute inset-0 z-0">
@@ -103,7 +109,7 @@ const Hero = () => {
           priority
         />
         {/* Soft light glassmorphism overlay for text legibility */}
-        <div className="absolute inset-0 bg-gradient-to-b from-white/85 via-white/75 to-background backdrop-blur-[1px]" />
+        <div className="absolute inset-0 bg-gradient-to-b from-white/40 via-white/55 to-background backdrop-blur-[1px]" />
       </div>
 
       {/* Hero Content Container */}
@@ -157,19 +163,14 @@ const Hero = () => {
           {/* Category Dropdown Select */}
           <div className="flex items-center gap-3 flex-1 w-full px-4 py-2 md:py-1 relative">
             <Search className="text-slate-400 w-5 h-5 flex-shrink-0" />
-            <select
+            <CustomSelect
+              options={categoryOptions}
               value={selectedCategory}
-              onChange={(e) => setSelectedCategory(e.target.value)}
-              className="bg-transparent text-sm text-slate-700 outline-none w-full py-1.5 cursor-pointer appearance-none pr-8"
-            >
-              <option value="">Select Category</option>
-              {HERO_CONTENT.categories.map((cat, i) => (
-                <option key={i} value={cat.slug} className="text-slate-700">
-                  {cat.label}
-                </option>
-              ))}
-            </select>
-            <ChevronDown className="text-slate-400 w-4 h-4 flex-shrink-0 pointer-events-none absolute right-4" />
+              onChange={setSelectedCategory}
+              placeholder="Select Category"
+              className="w-full"
+              triggerClassName="border-none bg-transparent hover:bg-transparent shadow-none px-0 py-1.5 h-auto text-slate-700 font-medium focus-visible:ring-0 focus-visible:ring-offset-0 focus:ring-0 focus:outline-none"
+            />
           </div>
 
           {/* Vertical Separator */}
