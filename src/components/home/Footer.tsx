@@ -13,7 +13,6 @@ import {
 } from "lucide-react";
 import { toast } from "sonner";
 import { useState } from "react";
-import { usePathname } from "next/navigation";
 
 const SERVICES = [
   { label: "Electrician", href: "#" },
@@ -128,18 +127,9 @@ const CONTACT_INFO = [
   { icon: MapPin, label: "Dhaka, Bangladesh", href: "#" },
 ];
 
-const STATS = [
-  { value: "10,000+", label: "Happy Customers" },
-  { value: "500+", label: "Verified Providers" },
-  { value: "20+", label: "Service Types" },
-  { value: "4.8★", label: "Average Rating" },
-];
-
 export default function Footer() {
   const [email, setEmail] = useState("");
   const [subscribed, setSubscribed] = useState(false);
-  const pathname = usePathname();
-  const isHomepage = pathname === "/";
 
   const handleSubscribe = (e: React.FormEvent) => {
     e.preventDefault();
@@ -151,28 +141,6 @@ export default function Footer() {
 
   return (
     <footer className="bg-[#FAF6F6] border-t border-slate-100 text-slate-600">
-      {/* ── STATS BANNER ── */}
-      {isHomepage ? (
-        <div className="bg-[#FF5A5F]/80 text-white">
-          <div className="max-w-7xl mx-auto px-4 md:px-6 py-6">
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6 text-center">
-              {STATS.map((s) => (
-                <div key={s.label} className="space-y-0.5">
-                  <p className="text-xl sm:text-2xl font-extrabold tracking-tight">
-                    {s.value}
-                  </p>
-                  <p className="text-xs sm:text-sm text-rose-100 font-medium">
-                    {s.label}
-                  </p>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-      ) : (
-        ""
-      )}
-
       {/* ── MAIN GRID ── */}
       <div className="max-w-7xl mx-auto px-4 md:px-6 pt-12 md:pt-16 pb-10">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-10 lg:gap-8">

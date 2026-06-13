@@ -6,7 +6,7 @@ import { motion } from "framer-motion";
 // Clean Data Architecture - Dynamic timeline step configurations
 const HOW_IT_WORKS_CONTENT = {
   title: "How It Works",
-  subtitle: "Get your household tasks solved in 3 simple, hassle-free steps",
+  subtitle: "Get your household tasks solved in 4 simple, hassle-free steps",
   steps: [
     {
       stepNumber: "01",
@@ -22,6 +22,11 @@ const HOW_IT_WORKS_CONTENT = {
       stepNumber: "03",
       title: "Get Service",
       description: "Relax while our certified expert takes care of everything professionally",
+    },
+    {
+      stepNumber: "04",
+      title: "Pay & Relax",
+      description: "Pay securely after the service is done and leave a review",
     }
   ]
 };
@@ -69,7 +74,7 @@ const HowItWorks = () => {
         {/* Timeline Path container */}
         <div className="relative">
           {/* Connecting SVG Arrow 1 (Desktop) */}
-          <div className="absolute left-[21%] w-[24%] top-6 hidden md:block z-0 pointer-events-none">
+          <div className="absolute left-[16%] w-[18%] top-6 hidden lg:block z-0 pointer-events-none">
             <svg
               className="w-full h-8 text-[#FF5A5F]"
               viewBox="0 0 100 24"
@@ -91,7 +96,29 @@ const HowItWorks = () => {
           </div>
 
           {/* Connecting SVG Arrow 2 (Desktop) */}
-          <div className="absolute left-[56%] w-[24%] top-6 hidden md:block z-0 pointer-events-none">
+          <div className="absolute left-[41%] w-[18%] top-6 hidden lg:block z-0 pointer-events-none">
+            <svg
+              className="w-full h-8 text-[#FF5A5F]"
+              viewBox="0 0 100 24"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+              preserveAspectRatio="none"
+            >
+              <motion.path
+                d="M2 12H96M96 12L88 5M96 12L88 19"
+                stroke="currentColor"
+                strokeWidth="2.5"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeDasharray="8 4"
+                animate={{ strokeDashoffset: [0, -24] }}
+                transition={{ repeat: Infinity, duration: 5, ease: "linear" }}
+              />
+            </svg>
+          </div>
+
+          {/* Connecting SVG Arrow 3 (Desktop) */}
+          <div className="absolute left-[66%] w-[18%] top-6 hidden lg:block z-0 pointer-events-none">
             <svg
               className="w-full h-8 text-[#FF5A5F]"
               viewBox="0 0 100 24"
@@ -118,7 +145,7 @@ const HowItWorks = () => {
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, margin: "-100px" }}
-            className="grid md:grid-cols-3 gap-10 md:gap-8 lg:gap-16 z-10 relative"
+            className="grid sm:grid-cols-2 lg:grid-cols-4 gap-10 md:gap-8 lg:gap-12 z-10 relative"
           >
             {HOW_IT_WORKS_CONTENT.steps.map((step, i) => (
               <React.Fragment key={i}>
@@ -145,8 +172,8 @@ const HowItWorks = () => {
                 </motion.div>
 
                 {/* Vertical SVG Arrow for Mobile Screens */}
-                {i < 2 && (
-                  <div className="flex md:hidden my-2 items-center justify-center text-[#FF5A5F] z-0 pointer-events-none">
+                {i < HOW_IT_WORKS_CONTENT.steps.length - 1 && (
+                  <div className="flex sm:hidden my-2 items-center justify-center text-[#FF5A5F] z-0 pointer-events-none">
                     <svg
                       className="w-6 h-10"
                       viewBox="0 0 24 40"

@@ -2,7 +2,7 @@
 
 import React from "react";
 import { motion } from "framer-motion";
-import { ShieldCheck, CreditCard, Award } from "lucide-react";
+import { ShieldCheck, CreditCard, Award, Headset } from "lucide-react";
 
 const WHY_CHOOSE_US_CONTENT = {
   title: "Why Choose Us",
@@ -25,6 +25,12 @@ const WHY_CHOOSE_US_CONTENT = {
       description:
         "We ensure the highest service quality with a money-back guarantee.",
       icon: Award,
+    },
+    {
+      title: "24/7 Support",
+      description:
+        "Our dedicated customer support team is always ready to assist you.",
+      icon: Headset,
     },
   ],
 };
@@ -66,7 +72,7 @@ export default function WhyChooseUs() {
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: "-80px" }}
-          className="grid md:grid-cols-3 gap-8 lg:gap-12"
+          className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6 lg:gap-10"
         >
           {WHY_CHOOSE_US_CONTENT.features.map((feature, i) => {
             const IconComponent = feature.icon;
@@ -80,7 +86,7 @@ export default function WhyChooseUs() {
                   group relative overflow-hidden
                   flex flex-col items-center justify-center
                   text-center h-full
-                  rounded-[32px] p-8 md:p-10
+                  rounded-[32px] p-6 md:p-8
                   bg-gradient-to-br from-white to-[#e8eaed]
                   border border-white/80
                   cursor-default

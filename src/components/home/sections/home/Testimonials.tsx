@@ -1,9 +1,7 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import Image from "next/image";
-import { Star, ChevronLeft, ChevronRight } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import { Star } from "lucide-react";
 
 // Expanded mock reviews (10 total)
 const TESTIMONIALS_CONTENT = {
@@ -83,7 +81,6 @@ const TESTIMONIALS_CONTENT = {
 
 const Testimonials = () => {
   const [activeIndex, setActiveIndex] = useState(0);
-  const [autoplay, setAutoplay] = useState(true);
   const [windowWidth, setWindowWidth] = useState(1024);
 
   // Resize listener to adapt cards per view dynamically
@@ -109,39 +106,28 @@ const Testimonials = () => {
   }, [cardsToShow, maxIndex, activeIndex]);
 
   useEffect(() => {
-    if (!autoplay) return;
     const timer = setInterval(() => {
       setActiveIndex((prev) => (prev >= maxIndex ? 0 : prev + 1));
     }, 5000);
     return () => clearInterval(timer);
-  }, [autoplay, maxIndex]);
-
-  const handleNext = () => {
-    setAutoplay(false);
-    setActiveIndex((prev) => (prev >= maxIndex ? 0 : prev + 1));
-  };
-
-  const handlePrev = () => {
-    setAutoplay(false);
-    setActiveIndex((prev) => (prev <= 0 ? maxIndex : prev - 1));
-  };
+  }, [maxIndex]);
 
   return (
-    <div className="bg-transparent py-12 md:py-16 lg:py-20 overflow-hidden relative">
+    <div className="bg-slate-50 py-12 md:py-16 lg:py-20 overflow-hidden relative">
       <div className="max-w-7xl mx-auto px-4 md:px-6 relative z-10">
         
         {/* Header Block */}
-        <div className="text-center mb-12">
-          <span className="text-xs font-bold tracking-wider uppercase text-[#FF5A5F] block mb-1">
+        <div className="mb-8 px-2">
+          <span className="text-sm font-medium tracking-widest uppercase text-[#FF5A5F] block mb-2">
             SOME HAPPY FACES
           </span>
-          <h2 className="text-2xl md:text-3xl lg:text-4xl font-extrabold text-slate-900 tracking-tight">
+          <h2 className="text-2xl md:text-3xl lg:text-4xl text-slate-800 tracking-tight">
             Real Happy Customers, Real Stories
           </h2>
         </div>
 
         {/* Testimonial slider wrapper */}
-        <div className="relative overflow-hidden w-full px-2 py-4">
+        <div className="relative overflow-hidden w-full py-4">
           <div 
             className="flex transition-transform duration-500 ease-out"
             style={{ transform: `translateX(-${activeIndex * (100 / cardsToShow)}%)` }}
@@ -151,83 +137,33 @@ const Testimonials = () => {
                 key={idx}
                 className="w-full sm:w-1/2 lg:w-1/3 flex-shrink-0 px-3"
               >
-                <div className="bg-slate-50 border border-slate-100/80 rounded-3xl p-6 md:p-8 shadow-[0_4px_20px_rgba(0,0,0,0.02)] flex flex-col justify-between h-[280px] hover:shadow-[0_12px_30px_rgba(0,0,0,0.04)] transition-all duration-300 hover:-translate-y-1">
-                  <div>
-                    {/* Rating stars */}
-                    <div className="flex gap-0.5 mb-4 text-[#FF5A5F]">
-                      {[...Array(test.rating)].map((_, sIdx) => (
-                        <Star key={sIdx} className="w-4 h-4 fill-[#FF5A5F] text-[#FF5A5F]" />
-                      ))}
-                    </div>
-
-                    <p className="text-slate-600 italic leading-relaxed text-sm md:text-base mb-6 font-medium line-clamp-4">
-                      {test.text}
-                    </p>
-                  </div>
-
-                  {/* Profile detail bottom */}
-                  <div className="flex items-center gap-3.5 pt-4 border-t border-slate-200/50">
-                    <div className="relative w-11 h-11 rounded-full overflow-hidden bg-slate-200 border border-slate-100 flex-shrink-0">
-                      <Image
-                        src={test.avatar}
-                        alt={test.name}
-                        fill
-                        className="object-cover"
-                      />
-                    </div>
+                <div className="bg-white rounded-[2rem] p-6 md:p-8 shadow-sm flex flex-col h-[260px] hover:shadow-md transition-all duration-300">
+                  {/* Profile detail top */}
+                  <div className="flex items-center gap-4 mb-6">
+                    <div className="w-14 h-14 rounded-full bg-[#e2e8f0] flex-shrink-0"></div>
                     <div>
-                      <h4 className="font-bold text-slate-800 text-sm md:text-base leading-snug">
+                      <h4 className="font-bold text-slate-900 text-sm md:text-base leading-tight">
                         {test.name}
                       </h4>
-                      <p className="text-xs text-slate-400 font-medium">
-                        {test.location}
-                      </p>
+                      {/* Rating stars */}
+                      <div className="flex gap-1 mt-1.5">
+                        {[...Array(test.rating)].map((_, sIdx) => (
+                          <Star key={sIdx} className="w-4 h-4 text-[#FF5A5F]" strokeWidth={2.5} />
+                        ))}
+                      </div>
                     </div>
                   </div>
+
+                  <p className="text-slate-500 italic leading-relaxed text-sm md:text-base font-medium">
+                    {test.text}
+                  </p>
                 </div>
               </div>
             ))}
           </div>
         </div>
 
-        {/* Carousel Navigation Buttons & Indicators */}
-        <div className="flex flex-col items-center gap-6 mt-8">
-          {/* Arrow Buttons */}
-          <div className="flex gap-4">
-            <button
-              onClick={handlePrev}
-              className="w-12 h-12 rounded-full border border-slate-200 bg-white hover:border-[#FF5A5F] hover:text-[#FF5A5F] flex items-center justify-center text-slate-500 shadow-sm hover:shadow-md transition-all cursor-pointer active:scale-95 z-20"
-              aria-label="Previous review"
-            >
-              <ChevronLeft className="w-5 h-5" />
-            </button>
-            <button
-              onClick={handleNext}
-              className="w-12 h-12 rounded-full border border-slate-200 bg-white hover:border-[#FF5A5F] hover:text-[#FF5A5F] flex items-center justify-center text-slate-500 shadow-sm hover:shadow-md transition-all cursor-pointer active:scale-95 z-20"
-              aria-label="Next review"
-            >
-              <ChevronRight className="w-5 h-5" />
-            </button>
-          </div>
 
-          {/* Dots Indicator */}
-          <div className="flex gap-2.5">
-            {[...Array(maxIndex + 1)].map((_, dotIdx) => (
-              <Button
-                variant="ghost"
-                key={dotIdx}
-                onClick={() => {
-                  setAutoplay(false);
-                  setActiveIndex(dotIdx);
-                }}
-                className={`h-2 p-0 min-w-0 rounded-full transition-all duration-300 cursor-pointer ${
-                  dotIdx === activeIndex ? "w-6 bg-[#FF5A5F] hover:bg-[#FF5A5F]" : "w-2 bg-slate-200 hover:bg-slate-300"
-                }`}
-                aria-label={`Go to slide ${dotIdx + 1}`}
-              />
-            ))}
-          </div>
-        </div>
 
       </div>
     </div>
