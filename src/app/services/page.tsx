@@ -49,19 +49,19 @@ export default function ServicesPage() {
   return (
     <>
       {/* Hero Section */}
-      <section className="services-hero">
-        <div className="services-hero-content">
-          <h1 className="services-title">Find the best home <span className="text-[#ff5a5f]">services</span></h1>
-          <p className="services-subtitle">
+      <section className="bg-[#fef7f5] flex items-start justify-center pt-[80px] px-6 pb-6">
+        <div className="max-w-[800px] w-full flex flex-col items-center text-center gap-6">
+          <h1 className="text-[2.75rem] font-bold text-[#1a1a1a] leading-[1.15] tracking-[-0.03em] m-0">Find the best home <span className="text-[#ff5a5f]">services</span></h1>
+          <p className="text-[1.05rem] text-[#6b7280] leading-[1.6] m-0 max-w-[520px]">
             Premium, reliable, and effortless solutions for your urban lifestyle
             in Bangladesh.
           </p>
 
           {/* Search Bar */}
-          <div className="services-search-bar">
-            <div className="services-search-input-wrapper">
+          <div className="flex items-center bg-white rounded-full shadow-[0_4px_16px_rgba(0,0,0,0.08)] py-2 pr-2 pl-6 w-full max-w-[750px] mt-2 border border-[#e5e7eb] transition-shadow duration-300 focus-within:shadow-[0_8px_30px_rgba(0,0,0,0.1)] focus-within:border-red-100">
+            <div className="flex items-center flex-1 gap-3">
               <svg
-                className="services-search-icon"
+                className="text-[#9ca3af] shrink-0"
                 width="20"
                 height="20"
                 viewBox="0 0 24 24"
@@ -78,14 +78,14 @@ export default function ServicesPage() {
                 id="service-search"
                 type="text"
                 placeholder="What service do you need?"
-                className="services-search-input"
+                className="flex-1 border-none outline-none text-base text-[#1a1a1a] bg-transparent py-3.5 placeholder:text-[#9ca3af]"
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
               />
             </div>
-            <div className="services-search-location">
+            <div className="flex items-center gap-1.5 px-4 border-l border-[#e5e7eb] whitespace-nowrap">
               <svg
-                className="services-location-icon"
+                className="text-[#9ca3af] shrink-0"
                 width="18"
                 height="18"
                 viewBox="0 0 24 24"
@@ -98,11 +98,11 @@ export default function ServicesPage() {
                 <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
                 <circle cx="12" cy="10" r="3" />
               </svg>
-              <span className="services-location-text">Dhaka, BD</span>
+              <span className="text-[0.9rem] font-medium text-[#1a1a1a]">Dhaka, BD</span>
             </div>
             <button
               id="filter-button"
-              className="services-filter-btn"
+              className="flex items-center justify-center w-[46px] h-[46px] rounded-full bg-[#ff5a5f] text-white border-none cursor-pointer shrink-0 transition-all duration-300 hover:bg-[#e04a4f] hover:scale-105 active:scale-95"
               aria-label="Filter services"
             >
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -128,14 +128,14 @@ export default function ServicesPage() {
                   href={`/services/${cat.id}`}
                   key={cat.id}
                   id={`category-${cat.id}`}
-                  className={`services-category-pill ${
+                  className={`flex items-center gap-2 px-5 py-2.5 rounded-full border bg-white text-[#1a1a1a] text-[0.9rem] font-medium cursor-pointer transition-all duration-300 hover:-translate-y-[1px] no-underline ${
                     activeCategory === cat.id
-                      ? "services-category-pill--active !border-[#ff5a5f] !text-[#ff5a5f] !bg-[#fff0ef]"
-                      : "text-gray-700 no-underline"
+                      ? "border-[#ff5a5f] text-[#ff5a5f] bg-[#fff0ef] shadow-[0_2px_8px_rgba(255,90,95,0.12)]"
+                      : "border-[#e5e7eb] hover:border-[#ff5a5f] hover:text-[#ff5a5f] hover:shadow-[0_2px_8px_rgba(255,90,95,0.1)]"
                   }`}
                   onClick={() => setActiveCategory(cat.id)}
                 >
-                  <span className="services-category-icon">{cat.icon}</span>
+                  <span className="text-base leading-none">{cat.icon}</span>
                   {cat.label}
                 </Link>
               ))}
@@ -147,14 +147,14 @@ export default function ServicesPage() {
                   href={`/services/${cat.id}`}
                   key={cat.id}
                   id={`category-${cat.id}`}
-                  className={`services-category-pill ${
+                  className={`flex items-center gap-2 px-5 py-2.5 rounded-full border bg-white text-[#1a1a1a] text-[0.9rem] font-medium cursor-pointer transition-all duration-300 hover:-translate-y-[1px] no-underline ${
                     activeCategory === cat.id
-                      ? "services-category-pill--active !border-[#ff5a5f] !text-[#ff5a5f] !bg-[#fff0ef]"
-                      : "text-gray-700 no-underline"
+                      ? "border-[#ff5a5f] text-[#ff5a5f] bg-[#fff0ef] shadow-[0_2px_8px_rgba(255,90,95,0.12)]"
+                      : "border-[#e5e7eb] hover:border-[#ff5a5f] hover:text-[#ff5a5f] hover:shadow-[0_2px_8px_rgba(255,90,95,0.1)]"
                   }`}
                   onClick={() => setActiveCategory(cat.id)}
                 >
-                  <span className="services-category-icon">{cat.icon}</span>
+                  <span className="text-base leading-none">{cat.icon}</span>
                   {cat.label}
                 </Link>
               ))}
@@ -164,29 +164,29 @@ export default function ServicesPage() {
       </section>
 
       {/* Trending Services Section */}
-      <section className="trending-section">
-        <div className="trending-container">
+      <section className="bg-[#FFF0EF] pt-10 px-6 pb-20">
+        <div className="max-w-[1100px] mx-auto">
           {/* Section Header */}
-          <div className="trending-header">
+          <div className="flex items-start justify-between mb-7">
             <div>
-              <h2 className="trending-title">Trending Services</h2>
-              <p className="trending-subtitle">
+              <h2 className="text-[1.6rem] font-bold text-[#1a1a1a] m-0 mb-1 tracking-[-0.02em]">Trending Services</h2>
+              <p className="text-[0.9rem] text-[#6b7280] m-0">
                 Highly requested by residents in Dhaka this month
               </p>
             </div>
-            <Link href="/services/trending" className="trending-view-all">
+            <Link href="/services/trending" className="text-[0.9rem] font-semibold text-[#8b1a1a] no-underline whitespace-nowrap transition-opacity duration-200 hover:opacity-80">
               View all →
             </Link>
           </div>
 
           {/* Service Cards */}
-          <div className="trending-grid">
+          <div className="grid grid-cols-1 md:grid-cols-[1.6fr_1fr] gap-6">
             {/* Featured Large Card */}
             {trendingServices
               .filter((s) => s.featured)
               .map((service) => (
-                <div key={service.id} className="trending-card-featured">
-                  <div className="trending-card-featured-image">
+                <div key={service.id} className="grid grid-cols-1 sm:grid-cols-2 bg-white rounded-2xl overflow-hidden shadow-[0_1px_3px_rgba(0,0,0,0.06)] border border-[#e5e7eb] transition-all duration-300 hover:shadow-[0_8px_30px_rgba(0,0,0,0.1)] hover:-translate-y-[2px]">
+                  <div className="relative min-h-[320px] overflow-hidden">
                     <Image
                       src={service.image}
                       alt={service.title}
@@ -194,28 +194,28 @@ export default function ServicesPage() {
                       style={{ objectFit: "cover" }}
                     />
                     {service.badge && (
-                      <span className="trending-badge">{service.badge}</span>
+                      <span className="absolute top-4 left-4 py-1.5 px-3.5 bg-[#8b1a1a] text-white text-[0.7rem] font-bold tracking-[0.06em] rounded-md z-10 uppercase">{service.badge}</span>
                     )}
                   </div>
-                  <div className="trending-card-featured-info">
-                    <div className="trending-rating">
-                      <span className="trending-stars">★★★★★</span>
-                      <span className="trending-rating-text">
+                  <div className="p-7 flex flex-col justify-center gap-3">
+                    <div className="flex items-center gap-1.5">
+                      <span className="text-[#f59e0b] text-[0.85rem] tracking-[1px]">★★★★★</span>
+                      <span className="text-[0.8rem] text-[#6b7280]">
                         ({service.rating}/5 • {service.reviews} reviews)
                       </span>
                     </div>
-                    <h3 className="trending-card-title">{service.title}</h3>
-                    <p className="trending-card-desc">{service.description}</p>
-                    <div className="trending-card-footer">
-                      <div className="trending-price">
-                        <span className="trending-price-label">
+                    <h3 className="text-[1.35rem] font-bold text-[#1a1a1a] m-0 tracking-[-0.01em]">{service.title}</h3>
+                    <p className="text-[0.9rem] text-[#6b7280] leading-[1.6] m-0">{service.description}</p>
+                    <div className="flex items-end justify-between mt-auto pt-3">
+                      <div className="flex flex-col gap-[2px]">
+                        <span className="text-[0.65rem] font-semibold text-[#9ca3af] tracking-[0.08em] uppercase">
                           STARTING FROM
                         </span>
-                        <span className="trending-price-value">
+                        <span className="text-[1.5rem] font-bold text-[#1a1a1a] tracking-[-0.02em]">
                           ৳{service.price.toLocaleString()}
                         </span>
                       </div>
-                      <Link href={`/services/${service.id}`} className="trending-book-btn">Book Now</Link>
+                      <Link href={`/services/${service.id}`} className="px-6 py-2.5 bg-[#ff5a5f] text-white text-[0.9rem] font-semibold rounded-full no-underline transition-all duration-300 shadow-[0_4px_12px_rgba(255,90,95,0.25)] hover:bg-[#e04a4f] hover:shadow-[0_6px_16px_rgba(255,90,95,0.35)] hover:-translate-y-[1px] active:scale-95">Book Now</Link>
                     </div>
                   </div>
                 </div>
@@ -225,8 +225,8 @@ export default function ServicesPage() {
             {trendingServices
               .filter((s) => !s.featured)
               .map((service) => (
-                <div key={service.id} className="trending-card-small">
-                  <div className="trending-card-small-image">
+                <div key={service.id} className="bg-white rounded-2xl overflow-hidden shadow-[0_1px_3px_rgba(0,0,0,0.06)] border border-[#e5e7eb] flex flex-col transition-all duration-300 hover:shadow-[0_8px_30px_rgba(0,0,0,0.1)] hover:-translate-y-[2px]">
+                  <div className="relative h-[180px] overflow-hidden">
                     <Image
                       src={service.image}
                       alt={service.title}
@@ -234,25 +234,25 @@ export default function ServicesPage() {
                       style={{ objectFit: "cover" }}
                     />
                   </div>
-                  <div className="trending-card-small-info">
-                    <div className="trending-card-small-header">
-                      <h3 className="trending-card-small-title">
+                  <div className="p-5 flex flex-col flex-1 gap-2">
+                    <div className="flex items-start justify-between gap-3">
+                      <h3 className="text-[1.1rem] font-bold text-[#1a1a1a] m-0 leading-tight tracking-[-0.01em]">
                         {service.title}
                       </h3>
-                      <span className="trending-rating-badge">
+                      <span className="bg-[#fff8e1] text-[#b45309] px-2 py-0.5 rounded-md text-[0.75rem] font-bold whitespace-nowrap">
                         ★ {service.rating}
                       </span>
                     </div>
-                    <p className="trending-card-small-desc">
+                    <p className="text-[0.85rem] text-[#6b7280] leading-[1.5] m-0 mt-1 flex-1">
                       {service.description}
                     </p>
-                    <div className="trending-card-small-footer">
-                      <span className="trending-price-value-small">
+                    <div className="flex items-center justify-between mt-auto pt-4 border-t border-[#f3f4f6]">
+                      <span className="text-[1.15rem] font-bold text-[#1a1a1a]">
                         ৳{service.price.toLocaleString()}
                       </span>
                       <Link
                         href={`/services/${service.id}`}
-                        className="trending-arrow-btn"
+                        className="flex items-center justify-center w-8 h-8 rounded-full bg-[#f3f4f6] text-[#4b5563] no-underline transition-all duration-200 hover:bg-[#8b1a1a] hover:text-white"
                         aria-label={`View ${service.title}`}
                       >
                         →
@@ -374,28 +374,28 @@ function ServiceListings() {
   const fillRight = ((priceMax - PRICE_FLOOR) / (PRICE_CEIL - PRICE_FLOOR)) * 100;
 
   return (
-    <section className="listings-section">
-      <div className="listings-container">
+    <section className="py-20 px-6 bg-[#f9fafb]">
+      <div className="max-w-[1200px] mx-auto flex flex-col md:flex-row gap-10">
         {/* Filters Sidebar */}
-        <aside className="listings-filters">
-          <div className="filters-header">
-            <h3 className="filters-title">Filters</h3>
-            <button className="filters-clear" onClick={handleClear}>Clear</button>
+        <aside className="w-full md:w-[280px] shrink-0 bg-white p-6 rounded-2xl border border-[#e5e7eb] shadow-sm h-fit md:sticky top-[100px]">
+          <div className="flex items-center justify-between mb-8 pb-4 border-b border-[#f3f4f6]">
+            <h3 className="text-[1.2rem] font-bold text-[#1a1a1a] m-0">Filters</h3>
+            <button className="text-[0.85rem] font-semibold text-[#6b7280] bg-transparent border-none cursor-pointer transition-colors hover:text-[#8b1a1a]" onClick={handleClear}>Clear</button>
           </div>
 
           {/* Price Range */}
-          <div className="filter-group">
-            <h4 className="filter-label">PRICE RANGE</h4>
-            <div className="filter-range-slider">
-              <div className="filter-range-track">
+          <div className="mb-8">
+            <h4 className="text-[0.75rem] font-bold text-[#9ca3af] tracking-wider mb-4 uppercase">PRICE RANGE</h4>
+            <div className="relative h-1.5 bg-[#e5e7eb] rounded-full mb-4 mt-2">
+              <div className="absolute inset-0 rounded-full overflow-hidden">
                 <div
-                  className="filter-range-fill"
+                  className="absolute h-full bg-[#8b1a1a] rounded-full"
                   style={{ left: `0%`, width: `${fillRight}%` }}
                 />
               </div>
               <input
                 type="range"
-                className="filter-range-input single-range"
+                className="absolute w-full h-1.5 top-0 left-0 appearance-none bg-transparent m-0 z-10 pointer-events-none [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:w-[18px] [&::-webkit-slider-thumb]:h-[18px] [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:bg-white [&::-webkit-slider-thumb]:border-[3px] [&::-webkit-slider-thumb]:border-[#8b1a1a] [&::-webkit-slider-thumb]:cursor-pointer [&::-webkit-slider-thumb]:pointer-events-auto [&::-webkit-slider-thumb]:shadow-[0_1px_4px_rgba(0,0,0,0.15)] hover:[&::-webkit-slider-thumb]:scale-125 transition-all"
                 min={PRICE_FLOOR}
                 max={PRICE_CEIL}
                 step={100}
@@ -404,49 +404,52 @@ function ServiceListings() {
                 aria-label="Maximum price"
               />
             </div>
-            <div className="filter-price-range">
+            <div className="flex justify-between text-[0.8rem] text-[#6b7280]">
               <span>৳{PRICE_FLOOR.toLocaleString()}</span>
               <span>৳{priceMax.toLocaleString()}</span>
             </div>
           </div>
 
           {/* Minimum Rating */}
-          <div className="filter-group">
-            <h4 className="filter-label">MINIMUM RATING</h4>
-            <div className="filter-radio-group">
-              <label className="filter-radio">
+          <div className="mb-8">
+            <h4 className="text-[0.75rem] font-bold text-[#9ca3af] tracking-wider mb-4 uppercase">MINIMUM RATING</h4>
+            <div className="flex flex-col gap-3">
+              <label className="flex items-center gap-3 cursor-pointer text-[0.95rem] text-[#4b5563] font-medium group">
                 <input
                   type="radio"
                   name="rating"
                   value="4.5"
+                  className="peer hidden"
                   checked={selectedRating === "4.5"}
                   onChange={(e) => setSelectedRating(e.target.value)}
                 />
-                <span className="filter-radio-circle" />
+                <span className="w-5 h-5 rounded-full border-2 border-[#d1d5db] peer-checked:border-[#8b1a1a] peer-checked:bg-[#8b1a1a] relative after:content-[''] after:absolute after:top-[4px] after:left-[4px] after:w-2.5 after:h-2.5 after:bg-white after:rounded-full after:opacity-0 peer-checked:after:opacity-100 transition-all" />
                 <span>4.5 &amp; up</span>
               </label>
-              <label className="filter-radio">
+              <label className="flex items-center gap-3 cursor-pointer text-[0.95rem] text-[#4b5563] font-medium group">
                 <input
                   type="radio"
                   name="rating"
                   value="4.0"
+                  className="peer hidden"
                   checked={selectedRating === "4.0"}
                   onChange={(e) => setSelectedRating(e.target.value)}
                 />
-                <span className="filter-radio-circle" />
+                <span className="w-5 h-5 rounded-full border-2 border-[#d1d5db] peer-checked:border-[#8b1a1a] peer-checked:bg-[#8b1a1a] relative after:content-[''] after:absolute after:top-[4px] after:left-[4px] after:w-2.5 after:h-2.5 after:bg-white after:rounded-full after:opacity-0 peer-checked:after:opacity-100 transition-all" />
                 <span>4.0 &amp; up</span>
               </label>
             </div>
           </div>
 
           {/* Sort By */}
-          <div className="filter-group">
-            <h4 className="filter-label">SORT BY</h4>
+          <div className="mb-8">
+            <h4 className="text-[0.75rem] font-bold text-[#9ca3af] tracking-wider mb-4 uppercase">SORT BY</h4>
             <select
               id="sort-by"
-              className="filter-select"
+              className="w-full p-3 bg-[#f9fafb] border border-[#e5e7eb] rounded-xl text-[0.95rem] text-[#1a1a1a] font-medium outline-none transition-all focus:border-[#8b1a1a] focus:bg-white focus:shadow-[0_0_0_3px_rgba(139,26,26,0.1)] appearance-none cursor-pointer"
               value={sortBy}
               onChange={(e) => setSortBy(e.target.value)}
+              style={{ backgroundImage: 'url("data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' width=\'16\' height=\'16\' viewBox=\'0 0 24 24\' fill=\'none\' stroke=\'%236b7280\' stroke-width=\'2\' stroke-linecap=\'round\' stroke-linejoin=\'round\'%3E%3Cpath d=\'M6 9l6 6 6-6\'/%3E%3C/svg%3E")', backgroundPosition: 'right 12px center', backgroundRepeat: 'no-repeat' }}
             >
               <option value="popularity">Popularity</option>
               <option value="price-low">Price: Low to High</option>
@@ -457,27 +460,28 @@ function ServiceListings() {
         </aside>
 
         {/* Service Cards Grid */}
-        <div className="listings-content">
-          <div className="listings-grid">
+        <div className="flex-1">
+          <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-6">
             {serviceListings.slice((currentPage - 1) * 6, currentPage * 6).map((service) => (
-              <Link href={`/services/${service.id}`} key={service.id} className="listing-card">
-                <div className="listing-card-image">
+              <Link href={`/services/${service.id}`} key={service.id} className="bg-white border border-[#e5e7eb] rounded-2xl overflow-hidden shadow-[0_2px_8px_rgba(0,0,0,0.04)] no-underline flex flex-col transition-all duration-300 hover:shadow-[0_12px_24px_rgba(0,0,0,0.08)] hover:-translate-y-1 group">
+                <div className="relative h-[220px] overflow-hidden">
                   <Image
                     src={service.image}
                     alt={service.title}
                     fill
                     style={{ objectFit: "cover" }}
+                    className="transition-transform duration-500 group-hover:scale-105"
                   />
-                  <span className="listing-card-category">
+                  <span className="absolute top-4 left-4 py-1.5 px-3 bg-white/90 backdrop-blur-sm text-[#1a1a1a] text-[0.75rem] font-bold rounded-md uppercase tracking-wider shadow-sm">
                     {service.category}
                   </span>
                 </div>
-                <div className="listing-card-info">
-                  <h3 className="listing-card-title">{service.title}</h3>
-                  <p className="listing-card-desc">{service.description}</p>
-                  <div className="listing-card-footer">
-                    <span className="listing-card-price">{service.price}</span>
-                    <span className="listing-card-done">
+                <div className="p-6 flex flex-col flex-1">
+                  <h3 className="text-[1.2rem] font-bold text-[#1a1a1a] m-0 mb-2">{service.title}</h3>
+                  <p className="text-[0.9rem] text-[#6b7280] leading-relaxed m-0 flex-1">{service.description}</p>
+                  <div className="flex items-center justify-between mt-5 pt-4 border-t border-[#f3f4f6]">
+                    <span className="text-[1.25rem] font-bold text-[#8b1a1a]">{service.price}</span>
+                    <span className="flex items-center gap-1.5 text-[0.8rem] font-medium text-[#6b7280]">
                       <svg
                         width="14"
                         height="14"
@@ -500,9 +504,9 @@ function ServiceListings() {
           </div>
 
           {/* Pagination */}
-          <div className="listings-pagination">
+          <div className="flex items-center justify-center gap-2 mt-12">
             <button
-              className="pagination-arrow"
+              className="flex items-center justify-center w-10 h-10 rounded-full border border-[#e5e7eb] bg-white text-[#1a1a1a] text-xl cursor-pointer transition-all duration-200 hover:border-[#8b1a1a] hover:text-[#8b1a1a] disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:border-[#e5e7eb] disabled:hover:text-[#1a1a1a]"
               disabled={currentPage === 1}
               onClick={() => setCurrentPage((p) => Math.max(1, p - 1))}
               aria-label="Previous page"
@@ -512,14 +516,14 @@ function ServiceListings() {
             {Array.from({ length: Math.ceil(serviceListings.length / 6) }, (_, i) => i + 1).map((page) => (
               <button
                 key={page}
-                className={`pagination-num ${currentPage === page ? "pagination-num--active" : ""}`}
+                className={`flex items-center justify-center w-10 h-10 rounded-full border text-[0.95rem] font-semibold cursor-pointer transition-all duration-200 ${currentPage === page ? "border-[#8b1a1a] bg-[#8b1a1a] text-white" : "border-[#e5e7eb] bg-white text-[#1a1a1a] hover:border-[#8b1a1a] hover:text-[#8b1a1a]"}`}
                 onClick={() => setCurrentPage(page)}
               >
                 {page}
               </button>
             ))}
             <button
-              className="pagination-arrow"
+              className="flex items-center justify-center w-10 h-10 rounded-full border border-[#e5e7eb] bg-white text-[#1a1a1a] text-xl cursor-pointer transition-all duration-200 hover:border-[#8b1a1a] hover:text-[#8b1a1a] disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:border-[#e5e7eb] disabled:hover:text-[#1a1a1a]"
               disabled={currentPage === Math.ceil(serviceListings.length / 6)}
               onClick={() => setCurrentPage((p) => Math.min(Math.ceil(serviceListings.length / 6), p + 1))}
               aria-label="Next page"
